@@ -15,8 +15,12 @@ export async function execute(interaction) {
     console.log(arg)
     const resp = await fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Decode%20Talker');
     const data = await resp.json();
-    // console.log(data.data[0].name);
+    const name = data.data[0].name;
+    const text = data.data[0].desc;
     const image = data.data[0].card_images[0].image_url;
-    console.log(image)
-    await interaction.reply({content: `data: ${data.data[0].name}`, files: [{attachment: `${image}`}]});
+    const price = data.data[0].card_prices[0].tcgplayer_price;
+
+    await interaction.reply({
+        content: `Name: ${name}\nText: ${text}\nLowest Price: ${price}`, 
+        files: [{attachment: `${image}`}]});
 }
