@@ -21,5 +21,6 @@ client.once(Events.ClientReady, () => {
 });
 
 client.login(process.env.TOKEN);
+client.application?.commands?.set(commands);
 
 client.on(Events.InteractionCreate, handleInteraction);
